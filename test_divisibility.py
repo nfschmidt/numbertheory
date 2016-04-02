@@ -37,5 +37,5 @@ class TestGcd():
         assert 'Both numbers cannot be 0' in str(exception_info.value)
 
     def test_gdc_is_non_negative(self):
-        assert d.gcd(-10, 100) == 10
-        assert d.gcd(10, -100) == 10
+        assert d.gcd(-10, 100) >= 0
+        assert d.gcd(10, -100) >= 0
