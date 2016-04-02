@@ -1,9 +1,9 @@
 import pytest
 import divisibility as d
 
+numbers_sample = [1, 10, 48, 2534, 46756456]
 
 class TestGcd():
-    numbers_sample = [1, 10, 48, 2534, 46756456]
 
     pairs_with_gcd = [
         (7469, 2464, 77),
@@ -39,3 +39,40 @@ class TestGcd():
     def test_gdc_is_non_negative(self):
         assert d.gcd(-10, 100) >= 0
         assert d.gcd(10, -100) >= 0
+
+
+class TestGcdLinearCombination():
+
+    def test_with_positive_numbers_a_multiple_of_b_the_result_is_0_1(self):
+        number = 10
+        assert d.gcd_linear_combination(number * 5, number) == (0, 1)
+
+    def test_positive_a_multiple_of_negative_b_result_is_0_negative1(self):
+        number = 10
+        assert d.gcd_linear_combination(number * 5, -number) == (0, -1)
+
+    def test_with_positive_numbers_b_multiple_of_a_the_result_is_1_0(self):
+        number = 10
+        assert d.gcd_linear_combination(number, number * 5) == (1, 0)
+
+    def test_positive_b_multiple_of_negative_a_result_is_negative1_0(self):
+        number = 10
+        assert d.gcd_linear_combination(-number, number * 5) == (-1, 0)
+
+    def test_second_reminder_equals_0(self):
+        assert d.gcd_linear_combination(88, 12) == (1, -7)
+
+    def test_positive_numbers_a_greater_than_b_more_than_2_reminders(self):
+        assert d.gcd_linear_combination(3587,1819) == (-36, 71)
+
+    def test_positive_numbers_b_greater_than_a_more_than_2_reminders(self):
+        assert d.gcd_linear_combination(1819, 3587) == (71, -36)
+
+    def test_positive_a_negative_b(self):
+        assert d.gcd_linear_combination(1819, -3587) == (71, 36)
+
+    def test_positive_b_negative_a(self):
+        assert d.gcd_linear_combination(-1819, 3587) == (-71, -36)
+
+    def test_negative_numbers(self):
+        assert d.gcd_linear_combination(-1819, -3587) == (-71, 36)
