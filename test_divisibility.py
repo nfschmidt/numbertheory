@@ -28,7 +28,7 @@ class TestGcd():
                 
     @pytest.mark.parametrize("a, b, g", pairs_with_gcd)
     def test_gcd_of_a_b_equals_gcd_of_b_a(self, a, b, g):
-        assert d.gcd(a, b) == d.gcd(b, a) and d.gcd(b, a) == g
+        assert d.gcd(a, b) == d.gcd(b, a)
         
     def test_gcd_of_0_and_0_raises_ValueError(self):
         with pytest.raises(ValueError) as exception_info:
