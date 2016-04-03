@@ -43,20 +43,20 @@ class TestGcd():
 
 class TestGcdLinearCombination():
 
-    def test_with_positive_numbers_a_multiple_of_b_the_result_is_0_1(self):
-        number = 10
+    @pytest.mark.parametrize('number', numbers_sample)
+    def test_with_positive_numbers_a_multiple_of_b_the_result_is_0_1(self, number):
         assert d.gcd_linear_combination(number * 5, number) == (0, 1)
 
-    def test_positive_a_multiple_of_negative_b_result_is_0_negative1(self):
-        number = 10
+    @pytest.mark.parametrize('number', numbers_sample)
+    def test_positive_a_multiple_of_negative_b_result_is_0_negative1(self, number):
         assert d.gcd_linear_combination(number * 5, -number) == (0, -1)
 
-    def test_with_positive_numbers_b_multiple_of_a_the_result_is_1_0(self):
-        number = 10
+    @pytest.mark.parametrize('number', numbers_sample)
+    def test_with_positive_numbers_b_multiple_of_a_the_result_is_1_0(self, number):
         assert d.gcd_linear_combination(number, number * 5) == (1, 0)
 
-    def test_positive_b_multiple_of_negative_a_result_is_negative1_0(self):
-        number = 10
+    @pytest.mark.parametrize('number', numbers_sample)
+    def test_positive_b_multiple_of_negative_a_result_is_negative1_0(self, number):
         assert d.gcd_linear_combination(-number, number * 5) == (-1, 0)
 
     def test_second_reminder_equals_0(self):
