@@ -12,7 +12,7 @@ def gcd(number1, number2):
     return gcd(lower, greater % lower)
 
 def gcd_linear_combination(number1, number2):
-    '''Return x, y such that x*a + y*b == gcd(a, b), using euclides' algorithm.'''
+    '''Return x, y such that x*a + y*b == gcd(a, b), using euclid's algorithm.'''
     coeficient1, coeficient2 = _gcd_linear_combination_non_negatives(abs(number1), abs(number2))
 
     if number1 < 0:
