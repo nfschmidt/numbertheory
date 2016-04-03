@@ -40,20 +40,20 @@ def _gcd_linear_combination_non_negatives(n1, n2):
     
     return _gdc_linear_combination_iteration_result(
         previous_reminder=first_reminder, reminder=second_reminder,
-        previous_x=first_x, x=second_x,
-        previous_y=first_y, y=second_y
+        previous_x=first_x, current_x=second_x,
+        previous_y=first_y, current_y=second_y
     )
 
 def _gdc_linear_combination_iteration_result(previous_reminder, reminder,
-                                             previous_x, x,
-                                             previous_y, y):
+                                             previous_x, current_x,
+                                             previous_y, current_y):
     quotient = previous_reminder // reminder
     reminder, previous_reminder = (previous_reminder % reminder), reminder
     while reminder:
-        x, previous_x = (previous_x - x * quotient), x
-        y, previous_y = (previous_y - y * quotient), y
+        current_x, previous_x = (previous_x - current_x * quotient), current_x
+        current_y, previous_y = (previous_y - current_y * quotient), current_y
 
         quotient = previous_reminder // reminder
         reminder, previous_reminder = (previous_reminder % reminder), reminder
 
-    return x, y
+    return current_x, current_y
