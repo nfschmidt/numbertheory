@@ -39,21 +39,21 @@ def _gcd_linear_combination_non_negatives(n1, n2):
     second_y = 1 - first_y * quotient
     
     return _gdc_linear_combination_iteration_result(
-        reminder_2=first_reminder, reminder_1=second_reminder,
-        x_2=first_x, x_1=second_x,
-        y_2=first_y, y_1=second_y
+        previous_reminder=first_reminder, reminder=second_reminder,
+        previous_x=first_x, x=second_x,
+        previous_y=first_y, y=second_y
     )
 
-def _gdc_linear_combination_iteration_result(reminder_2, reminder_1,
-                                             x_2, x_1, y_2, y_1):
-    quotient = reminder_2 // reminder_1
-    reminder_1, reminder_2 = (reminder_2 % reminder_1), reminder_1
-    while reminder_1:
-        x_1, x_2 = (x_2 - x_1 * quotient), x_1
-        y_1, y_2 = (y_2 - y_1 * quotient), y_1
+def _gdc_linear_combination_iteration_result(previous_reminder, reminder,
+                                             previous_x, x,
+                                             previous_y, y):
+    quotient = previous_reminder // reminder
+    reminder, previous_reminder = (previous_reminder % reminder), reminder
+    while reminder:
+        x, previous_x = (previous_x - x * quotient), x
+        y, previous_y = (previous_y - y * quotient), y
 
-        quotient = reminder_2 // reminder_1
-        reminder_1, reminder_2 = (reminder_2 % reminder_1), reminder_1
+        quotient = previous_reminder // reminder
+        reminder, previous_reminder = (previous_reminder % reminder), reminder
 
-    return x_1, y_1
-    
+    return x, y
