@@ -43,6 +43,13 @@ class TestGcd():
 
 class TestGcdLinearCombination():
 
+    ab_xy = [
+        (7469, 2464, 1, -3),
+        (423, 198, -7, 15),
+        (93, 81, 7, -8),
+        (3587, 1819, -36, 71)
+    ]
+    
     @pytest.mark.parametrize('number', numbers_sample)
     def test_with_positive_numbers_a_multiple_of_b_the_result_is_0_1(self, number):
         assert d.gcd_linear_combination(number * 5, number) == (0, 1)
@@ -62,17 +69,22 @@ class TestGcdLinearCombination():
     def test_second_reminder_equals_0(self):
         assert d.gcd_linear_combination(88, 12) == (1, -7)
 
-    def test_positive_numbers_a_greater_than_b_more_than_2_reminders(self):
-        assert d.gcd_linear_combination(3587,1819) == (-36, 71)
+    @pytest.mark.parametrize('a, b, x, y', ab_xy)
+    def test_positive_numbers_a_greater_than_b_more_than_2_reminders(self, a, b, x, y):
+        assert d.gcd_linear_combination(a, b) == (x, y)
 
-    def test_positive_numbers_b_greater_than_a_more_than_2_reminders(self):
-        assert d.gcd_linear_combination(1819, 3587) == (71, -36)
+    @pytest.mark.parametrize('a, b, x, y', ab_xy)
+    def test_positive_numbers_b_greater_than_a_more_than_2_reminders(self, a, b, x, y):
+        assert d.gcd_linear_combination(b, a) == (y, x)
 
-    def test_positive_a_negative_b(self):
-        assert d.gcd_linear_combination(1819, -3587) == (71, 36)
+    @pytest.mark.parametrize('a, b, x, y', ab_xy)
+    def test_positive_a_negative_b(self, a, b, x, y):
+        assert d.gcd_linear_combination(a, -b) == (x, -y)
 
-    def test_positive_b_negative_a(self):
-        assert d.gcd_linear_combination(-1819, 3587) == (-71, -36)
+    @pytest.mark.parametrize('a, b, x, y', ab_xy)
+    def test_positive_b_negative_a(self, a, b, x, y):
+        assert d.gcd_linear_combination(-a, b) == (-x, y)
 
-    def test_negative_numbers(self):
-        assert d.gcd_linear_combination(-1819, -3587) == (-71, 36)
+    @pytest.mark.parametrize('a, b, x, y', ab_xy)
+    def test_negative_numbers(self, a, b, x, y):
+        assert d.gcd_linear_combination(-a, -b) == (-x, -y)
