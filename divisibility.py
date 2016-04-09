@@ -6,7 +6,7 @@ def gcd(number1, number2):
     return result
 
 def gcd_linear_combination(number1, number2):
-    '''Return g, x, y such that x*n1 + y*n2 == g and g == gcd(n1, n2).'''
+    '''Return g, x, y such that x*n1 + y*n2 == g, where g is de gcd of n1 and n2.'''
 
     _check_not_all_zero((number1, number2))
     abs_n1, abs_n2 = abs(number1), abs(number2)
