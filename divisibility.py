@@ -2,17 +2,17 @@
 def gcd(number1, number2):
     '''Compute the greatest common divisor of a and b.'''
 
+    _check_not_all_zero((number1, number2))
     lower, greater = sorted((abs(number1), abs(number2)))
     if lower == 0:
-        if greater != 0:
-            return greater
-        else:
-            raise ValueError('Both numbers cannot be 0')
+        return greater
 
     return gcd(lower, greater % lower)
 
 def gcd_linear_combination(number1, number2):
     '''Return x, y such that x*a + y*b == gcd(a, b), using euclid's algorithm.'''
+
+    _check_not_all_zero((number1, number2))
     coeficient1, coeficient2 = _gcd_linear_combination_non_negatives(abs(number1), abs(number2))
 
     if number1 < 0:
@@ -21,6 +21,10 @@ def gcd_linear_combination(number1, number2):
         coeficient2 *= -1
 
     return coeficient1, coeficient2
+
+def _check_not_all_zero(numbers):
+    if not [n for n in numbers if n != 0]:
+        raise ValueError('All numbers cannot be 0')
 
 def _gcd_linear_combination_non_negatives(number1, number2):
     first_reminder = number1 % number2

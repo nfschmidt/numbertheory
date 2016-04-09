@@ -34,7 +34,7 @@ class TestGcd():
         with pytest.raises(ValueError) as exception_info:
             d.gcd(0, 0)
             
-        assert 'Both numbers cannot be 0' in str(exception_info.value)
+        assert 'All numbers cannot be 0' in str(exception_info.value)
 
     def test_gdc_is_non_negative(self):
         assert d.gcd(-10, 100) >= 0
@@ -88,3 +88,9 @@ class TestGcdLinearCombination():
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_negative_numbers(self, a, b, x, y):
         assert d.gcd_linear_combination(-a, -b) == (-x, -y)
+
+    def test_raises_exception_if_both_arguments_are_0(self):
+        with pytest.raises(ValueError) as error_info:
+            d.gcd_linear_combination(0, 0)
+
+        assert 'All numbers cannot be 0' in str(error_info.value) 
