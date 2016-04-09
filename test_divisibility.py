@@ -52,42 +52,47 @@ class TestGcdLinearCombination():
     
     @pytest.mark.parametrize('number', numbers_sample)
     def test_with_positive_numbers_a_multiple_of_b_the_result_is_0_1(self, number):
-        assert d.gcd_linear_combination(number * 5, number) == (0, 1)
+        _, x, y = d.gcd_linear_combination(number * 5, number)
+        assert (x, y) == (0, 1)
 
     @pytest.mark.parametrize('number', numbers_sample)
     def test_positive_a_multiple_of_negative_b_result_is_0_negative1(self, number):
-        assert d.gcd_linear_combination(number * 5, -number) == (0, -1)
+        _, x, y = d.gcd_linear_combination(number * 5, -number)
+        assert (x, y) == (0, -1)
 
     @pytest.mark.parametrize('number', numbers_sample)
     def test_with_positive_numbers_b_multiple_of_a_the_result_is_1_0(self, number):
-        assert d.gcd_linear_combination(number, number * 5) == (1, 0)
+        _, x, y = d.gcd_linear_combination(number, number * 5)
+        assert (x, y) == (1, 0)
 
     @pytest.mark.parametrize('number', numbers_sample)
     def test_positive_b_multiple_of_negative_a_result_is_negative1_0(self, number):
-        assert d.gcd_linear_combination(-number, number * 5) == (-1, 0)
+        _, x, y = d.gcd_linear_combination(-number, number * 5)
+        assert (x, y) == (-1, 0)
 
     def test_second_reminder_equals_0(self):
-        assert d.gcd_linear_combination(88, 12) == (1, -7)
+        _, x, y = d.gcd_linear_combination(88, 12)
+        assert (x, y) == (1, -7)
 
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_positive_numbers_a_greater_than_b_more_than_2_reminders(self, a, b, x, y):
-        assert d.gcd_linear_combination(a, b) == (x, y)
+        assert d.gcd_linear_combination(a, b)[1:3] == (x, y)
 
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_positive_numbers_b_greater_than_a_more_than_2_reminders(self, a, b, x, y):
-        assert d.gcd_linear_combination(b, a) == (y, x)
+        assert d.gcd_linear_combination(b, a)[1:3] == (y, x)
 
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_positive_a_negative_b(self, a, b, x, y):
-        assert d.gcd_linear_combination(a, -b) == (x, -y)
+        assert d.gcd_linear_combination(a, -b)[1:3] == (x, -y)
 
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_positive_b_negative_a(self, a, b, x, y):
-        assert d.gcd_linear_combination(-a, b) == (-x, y)
+        assert d.gcd_linear_combination(-a, b)[1:3] == (-x, y)
 
     @pytest.mark.parametrize('a, b, x, y', ab_xy)
     def test_negative_numbers(self, a, b, x, y):
-        assert d.gcd_linear_combination(-a, -b) == (-x, -y)
+        assert d.gcd_linear_combination(-a, -b)[1:3] == (-x, -y)
 
     def test_raises_exception_if_both_arguments_are_0(self):
         with pytest.raises(ValueError) as error_info:
