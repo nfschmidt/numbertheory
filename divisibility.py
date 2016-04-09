@@ -26,12 +26,11 @@ def _check_not_all_zero(numbers):
 def _gcd_linear_combination_non_negatives(number1, number2):
     x, next_x = 1, 0
     y, next_y = 0, 1
-    reminder, next_reminder = number1, number2
 
-    while next_reminder:
-        quotient = reminder // next_reminder
+    while number2:
+        quotient = number1 // number2
         x, next_x = next_x, x - quotient * next_x
         y, next_y = next_y, y - quotient * next_y
-        reminder, next_reminder = next_reminder, reminder - quotient * next_reminder
+        number1, number2 = number2, number1 - quotient * number2
 
-    return reminder, x, y
+    return number1, x, y
