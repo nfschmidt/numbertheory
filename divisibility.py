@@ -11,13 +11,13 @@ def gcd_linear_combination(number1, number2):
     _check_not_all_zero((number1, number2))
     abs_n1, abs_n2 = abs(number1), abs(number2)
 
-    gcd, coeficient1, coeficient2 = _gcd_linear_combination_non_negatives(abs_n1, abs_n2)
+    gcd_, coef1, coef2 = _gcd_linear_combination_non_negatives(abs_n1, abs_n2)
     if number1 < 0:
-        coeficient1 *= -1
+        coef1 *= -1
     if number2 < 0:
-        coeficient2 *= -1
+        coef2 *= -1
 
-    return gcd, coeficient1, coeficient2
+    return gcd_, coef1, coef2
 
 def _check_not_all_zero(numbers):
     if not [n for n in numbers if n != 0]:
